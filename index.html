@@ -1,407 +1,590 @@
-<!DOCTYPE html>
-<html lang="nl" class="scroll-smooth">
+<!doctype html>
+<html lang="nl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OP DE KAART — Google beheer &amp; reviewbescherming</title>
-  <meta name="description" content="Wij positioneren jouw zaak bovenaan in Google Maps, automatiseren je reviewproces en bewaken je online reputatie. Actief in Lievegem, Gent & omstreken." />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: { electric: '#007aff', 'electric-soft': '#3b9bff' },
-          fontFamily: { sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'] },
-          animation: { float: 'float-slow 6s ease-in-out infinite' },
-        },
-      },
-    }
-  </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <style>
-    body { background-color: #040b14; color: #f5f8ff; font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif; }
-    .glass {
-      background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
-      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-    .glow-blue {
-      box-shadow: 0 0 0 1px rgba(0,122,255,0.4), 0 0 25px -2px rgba(0,122,255,0.55), 0 0 60px -10px rgba(0,122,255,0.35);
-    }
-    .glow-text { text-shadow: 0 0 30px rgba(0,122,255,0.45); }
-    .bg-grid {
-      background-image:
-        linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
-      background-size: 56px 56px;
-    }
-    @keyframes float-slow { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-    .card-number { transition: all .3s; }
-    .group:hover .card-number { color: rgba(0,122,255,0.2); text-shadow: 0 0 40px rgba(0,122,255,0.45); }
-    .step-icon { transition: all .3s; }
-    .group:hover .step-icon {
-      background-color: #007aff; color: #fff;
-      box-shadow: 0 0 0 1px rgba(0,122,255,0.4), 0 0 25px -2px rgba(0,122,255,0.55), 0 0 60px -10px rgba(0,122,255,0.35);
-    }
-    .nav-link:hover { text-shadow: 0 0 16px rgba(0,122,255,0.55); }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>OP DE KAART — Google beheer & reviewbescherming</title>
+<meta name="description" content="Wij richten je Google Bedrijfsprofiel perfect in en verzamelen automatisch nieuwe reviews. Lokaal beter gevonden worden in Vlaanderen." />
+<style>
+  :root{
+    color-scheme: dark;
+    --background: oklch(0.16 0.028 264);
+    --foreground: oklch(0.98 0.005 260);
+    --card: oklch(0.2 0.03 264);
+    --muted-foreground: oklch(0.72 0.02 260);
+    --primary: oklch(0.6 0.19 256);
+    --primary-foreground: oklch(0.99 0 0);
+    --border: oklch(1 0 0 / 9%);
+    --input: oklch(1 0 0 / 14%);
+    --radius: 0.75rem;
+    --max: 80rem;
+    --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; border-color:var(--border); }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--background);
+    color:var(--foreground);
+    font-family:var(--font-sans);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+  }
+  a{ color:inherit; text-decoration:none; }
+  h1,h2,h3{ letter-spacing:-0.02em; line-height:1.1; font-weight:700; }
+  section{ position:relative; }
+
+  .wrap{ max-width:var(--max); margin:0 auto; padding:0 1.25rem; }
+  @media(min-width:768px){ .wrap{ padding:0 2rem; } }
+
+  .bg-grid{
+    background-image:
+      linear-gradient(to right, oklch(1 0 0 / 4%) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(1 0 0 / 4%) 1px, transparent 1px);
+    background-size:56px 56px;
+  }
+  .glass{
+    background:linear-gradient(180deg, oklch(0.24 0.035 264 / 70%), oklch(0.19 0.03 264 / 70%));
+    border:1px solid oklch(1 0 0 / 8%);
+    backdrop-filter:blur(6px);
+  }
+  .eyebrow{ font-size:1rem; font-weight:700; text-transform:uppercase; letter-spacing:.16em; color:var(--primary); }
+  @media(min-width:768px){ .eyebrow{ font-size:1.25rem; } }
+  .muted{ color:var(--muted-foreground); }
+  .primary-text{ color:var(--primary); }
+
+  /* Buttons */
+  .btn{ display:inline-flex; align-items:center; justify-content:center; gap:.5rem; border-radius:9999px; padding:.9rem 1.5rem; font-size:.875rem; font-weight:600; cursor:pointer; border:1px solid transparent; transition:transform .15s ease, background .15s ease; }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn-primary{ background:var(--primary); color:var(--primary-foreground); box-shadow:0 0 34px -8px var(--primary); }
+  .btn-ghost{ border:1px solid var(--border); background:oklch(1 0 0 / 5%); color:var(--foreground); }
+  .btn-ghost:hover{ background:oklch(1 0 0 / 10%); }
+  .icon{ width:1rem; height:1rem; flex:none; }
+
+  /* Header */
+  header{ position:sticky; top:0; z-index:50; border-bottom:1px solid oklch(1 0 0 / 7%); background:oklch(0.16 0.028 264 / 80%); backdrop-filter:blur(16px); }
+  .nav-row{ display:flex; align-items:center; justify-content:space-between; gap:1.5rem; height:4.5rem; }
+  .logo{ display:flex; align-items:center; gap:.75rem; }
+  .logo-badge{ position:relative; width:2.5rem; height:2.5rem; display:flex; align-items:center; justify-content:center; border-radius:.6rem; background:var(--primary); box-shadow:0 0 24px -6px var(--primary); overflow:hidden; flex:none; }
+  .logo-badge svg{ width:1.25rem; height:1.25rem; color:var(--primary-foreground); }
+  .logo-img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .logo-name{ font-size:.875rem; font-weight:700; }
+  .logo-sub{ margin-top:.15rem; font-size:.625rem; font-weight:500; text-transform:uppercase; letter-spacing:.18em; color:var(--muted-foreground); }
+  nav.main{ display:none; align-items:center; gap:.25rem; }
+  nav.main a{ border-radius:.4rem; padding:.5rem .9rem; font-size:.875rem; font-weight:500; color:var(--muted-foreground); transition:.15s; cursor:pointer; }
+  nav.main a:hover{ background:oklch(1 0 0 / 5%); color:var(--foreground); }
+  .header-cta{ display:none; }
+  .menu-btn{ width:2.5rem; height:2.5rem; display:flex; align-items:center; justify-content:center; border:1px solid var(--border); border-radius:.4rem; background:transparent; color:var(--foreground); cursor:pointer; }
+  @media(min-width:1024px){ nav.main{ display:flex; } .menu-btn{ display:none; } }
+  @media(min-width:640px){ .header-cta{ display:inline-flex; } }
+  .mobile-nav{ display:none; border-top:1px solid oklch(1 0 0 / 7%); padding:1rem 1.25rem; }
+  .mobile-nav.open{ display:block; }
+  .mobile-nav a{ display:block; border-radius:.4rem; padding:.75rem; font-size:.875rem; font-weight:500; color:var(--muted-foreground); cursor:pointer; }
+  .mobile-nav a:hover{ background:oklch(1 0 0 / 5%); color:var(--foreground); }
+
+  /* Page switching */
+  .page{ display:none; }
+  .page.active{ display:block; }
+
+  /* Hero */
+  .glow{ pointer-events:none; position:absolute; border-radius:9999px; background:oklch(0.6 0.19 256 / 20%); filter:blur(140px); }
+  .hero-grid{ display:grid; gap:3rem; align-items:center; padding:4rem 0; }
+  @media(min-width:1024px){ .hero-grid{ grid-template-columns:1.05fr 1fr; padding:6rem 0; } }
+  .badge{ display:inline-flex; align-items:center; gap:.5rem; border-radius:9999px; border:1px solid var(--border); background:oklch(1 0 0 / 5%); padding:.4rem .9rem; font-size:.75rem; font-weight:500; color:var(--muted-foreground); }
+  .badge svg{ width:.9rem; height:.9rem; color:var(--primary); fill:var(--primary); }
+  h1{ margin-top:1.5rem; font-size:2.25rem; }
+  @media(min-width:768px){ h1{ font-size:3.75rem; } }
+  .lead{ margin-top:1.5rem; max-width:36rem; font-size:1rem; color:var(--muted-foreground); }
+  @media(min-width:768px){ .lead{ font-size:1.125rem; } }
+  .hero-btns{ margin-top:2rem; display:flex; flex-direction:column; gap:.75rem; }
+  @media(min-width:640px){ .hero-btns{ flex-direction:row; } }
+  .highlights{ margin-top:2.5rem; list-style:none; display:grid; grid-template-columns:repeat(2,1fr); gap:1.25rem 1.5rem; }
+  @media(min-width:640px){ .highlights{ grid-template-columns:repeat(4,1fr); } }
+  .highlights li{ display:flex; flex-direction:column; gap:.5rem; }
+  .highlights svg{ width:1.25rem; height:1.25rem; color:var(--primary); }
+  .highlights span{ font-size:.75rem; color:var(--muted-foreground); }
+  .hero-visual{ position:relative; }
+  .hero-visual .frame{ overflow:hidden; border-radius:1.5rem; border:1px solid var(--border); box-shadow:0 25px 50px -12px rgba(0,0,0,.5); }
+  .hero-visual img{ display:block; width:100%; height:auto; }
+  .hero-fallback{ aspect-ratio:4/3; display:flex; align-items:center; justify-content:center; background:linear-gradient(160deg, oklch(0.28 0.05 258), oklch(0.18 0.03 264)); color:var(--muted-foreground); font-size:.875rem; text-align:center; padding:2rem; }
+
+  /* Sections */
+  .section-pad{ padding:5rem 0; }
+  @media(min-width:768px){ .section-pad{ padding:7rem 0; } }
+  .heading{ max-width:42rem; margin:0 auto; text-align:center; display:flex; flex-direction:column; gap:1rem; }
+  .heading h2{ font-size:1.875rem; }
+  @media(min-width:768px){ .heading h2{ font-size:2.25rem; } }
+
+  .cards-2{ margin-top:3.5rem; display:grid; gap:1.5rem; }
+  @media(min-width:768px){ .cards-2{ grid-template-columns:repeat(2,1fr); } }
+  .card{ display:flex; flex-direction:column; gap:1rem; border-radius:1rem; padding:2rem; }
+  .card-ico{ width:2.75rem; height:2.75rem; display:flex; align-items:center; justify-content:center; border-radius:.75rem; background:oklch(0.6 0.19 256 / 15%); color:var(--primary); }
+  .card-ico svg{ width:1.25rem; height:1.25rem; }
+  .tag{ font-size:.75rem; font-weight:600; text-transform:uppercase; letter-spacing:.16em; color:var(--primary); }
+  .card h3{ font-size:1.25rem; }
+  .card p{ font-size:.875rem; color:var(--muted-foreground); }
+  .callout{ max-width:48rem; margin:3rem auto 0; border-radius:1rem; border:1px solid oklch(0.6 0.19 256 / 25%); background:oklch(0.6 0.19 256 / 5%); padding:2rem; text-align:center; }
+  .callout p{ font-size:1rem; }
+  @media(min-width:768px){ .callout p{ font-size:1.125rem; } }
+
+  /* Pricing */
+  .plans{ margin-top:3.5rem; display:grid; gap:1.5rem; align-items:stretch; }
+  @media(min-width:768px){ .plans{ grid-template-columns:repeat(2,1fr); } }
+  @media(min-width:1280px){ .plans{ grid-template-columns:repeat(4,1fr); } }
+  .plan{ position:relative; display:flex; flex-direction:column; height:100%; border-radius:1rem; padding:1.75rem; }
+  .plan.featured{ border:1px solid var(--primary); background:oklch(0.6 0.19 256 / 10%); box-shadow:0 0 50px -12px oklch(0.6 0.19 256 / 50%); }
+  .ribbon{ position:absolute; top:-.75rem; left:50%; transform:translateX(-50%); display:inline-flex; align-items:center; gap:.4rem; border-radius:9999px; background:var(--primary); color:var(--primary-foreground); padding:.35rem .9rem; font-size:.75rem; font-weight:600; }
+  .ribbon svg{ width:.85rem; height:.85rem; }
+  .plan h3{ font-size:1.125rem; }
+  .price{ margin-top:1rem; display:flex; align-items:flex-end; gap:.4rem; }
+  .price .amt{ font-size:2.25rem; font-weight:700; letter-spacing:-.02em; }
+  .price .per{ padding-bottom:.25rem; font-size:.875rem; color:var(--muted-foreground); }
+  .setup{ margin-top:.25rem; min-height:1.25rem; font-size:.75rem; font-weight:500; color:var(--primary); }
+  .forwho{ margin-top:1rem; font-size:.875rem; color:var(--muted-foreground); }
+  .feat{ margin-top:1.5rem; list-style:none; display:flex; flex-direction:column; gap:.75rem; border-top:1px solid oklch(1 0 0 / 7%); padding-top:1.5rem; }
+  .feat li{ display:flex; align-items:flex-start; gap:.6rem; font-size:.875rem; color:oklch(0.98 0.005 260 / 90%); }
+  .feat svg{ width:1rem; height:1rem; margin-top:.15rem; flex:none; color:var(--primary); }
+  .plan .btn{ margin-top:2rem; width:100%; }
+  .plan .btn-spacer{ flex:1 1 auto; }
+
+  /* FAQ */
+  .faq-wrap{ max-width:48rem; margin:0 auto; }
+  .faq-list{ margin-top:3rem; display:flex; flex-direction:column; gap:.75rem; }
+  .faq{ overflow:hidden; border-radius:1rem; border:1px solid var(--border); background:oklch(1 0 0 / 3%); transition:.2s; }
+  .faq.open{ border-color:oklch(0.6 0.19 256 / 40%); background:oklch(0.6 0.19 256 / 5%); }
+  .faq button{ width:100%; display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:1.25rem 1.5rem; text-align:left; background:transparent; border:0; color:inherit; cursor:pointer; }
+  .faq button span{ font-size:1rem; font-weight:600; letter-spacing:-.01em; }
+  .faq button svg{ width:1.25rem; height:1.25rem; flex:none; color:var(--primary); transition:transform .3s; }
+  .faq.open button svg{ transform:rotate(45deg); }
+  .faq-body{ display:grid; grid-template-rows:0fr; opacity:0; transition:all .3s ease; }
+  .faq.open .faq-body{ grid-template-rows:1fr; opacity:1; }
+  .faq-body > div{ overflow:hidden; }
+  .faq-body p{ padding:0 1.5rem 1.5rem; font-size:.875rem; color:var(--muted-foreground); }
+
+  /* CTA banner */
+  .cta-banner{ position:relative; overflow:hidden; border-radius:1.5rem; border:1px solid oklch(0.6 0.19 256 / 30%); background:oklch(0.6 0.19 256 / 10%); padding:3.5rem 1.5rem; text-align:center; margin-bottom:6rem; }
+  @media(min-width:768px){ .cta-banner{ padding:5rem 3rem; } }
+  .cta-banner h2{ max-width:36rem; margin:0 auto; font-size:1.875rem; }
+  @media(min-width:768px){ .cta-banner h2{ font-size:2.25rem; } }
+  .cta-btns{ margin-top:2rem; display:flex; flex-direction:column; gap:.75rem; justify-content:center; }
+  @media(min-width:640px){ .cta-btns{ flex-direction:row; } }
+
+  /* Over ons */
+  .about-grid{ margin-top:1.5rem; display:grid; gap:3rem; align-items:center; }
+  @media(min-width:1024px){ .about-grid{ grid-template-columns:0.9fr 1.1fr; } }
+  .photo{ position:relative; }
+  .photo .box{ position:relative; overflow:hidden; aspect-ratio:4/5; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.75rem; border-radius:1.5rem; border:1px dashed var(--border); background:oklch(1 0 0 / 3%); text-align:center; padding:2rem; }
+  .photo svg{ width:2rem; height:2rem; color:var(--muted-foreground); }
+  .photo p{ max-width:16rem; font-size:.875rem; color:var(--muted-foreground); }
+  .about-photo-img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:1.5rem; }
+  .about h1{ margin-top:0; font-size:1.875rem; }
+  @media(min-width:768px){ .about h1{ font-size:3rem; } }
+  .about-text{ margin-top:1.5rem; display:flex; flex-direction:column; gap:1.25rem; font-size:1rem; color:var(--muted-foreground); }
+  .values{ margin-top:2rem; list-style:none; display:flex; flex-direction:column; gap:.75rem; }
+  .values li{ display:flex; align-items:center; gap:.75rem; font-size:.875rem; }
+  .values .v-ico{ width:2.25rem; height:2.25rem; display:flex; align-items:center; justify-content:center; border-radius:.5rem; background:oklch(0.6 0.19 256 / 15%); color:var(--primary); }
+  .values .v-ico svg{ width:1.1rem; height:1.1rem; }
+
+  /* Contact */
+  .contact-head{ max-width:42rem; }
+  .contact-head h1{ margin-top:1.5rem; font-size:1.875rem; }
+  @media(min-width:768px){ .contact-head h1{ font-size:3rem; } }
+  .contact-grid{ margin-top:3rem; display:grid; gap:2rem; }
+  @media(min-width:1024px){ .contact-grid{ grid-template-columns:1fr 1.15fr; } }
+  .details{ display:flex; flex-direction:column; gap:1rem; }
+  .detail{ display:flex; align-items:center; gap:1rem; border-radius:1rem; padding:1.25rem; }
+  .detail .d-ico{ width:2.75rem; height:2.75rem; flex:none; display:flex; align-items:center; justify-content:center; border-radius:.75rem; background:oklch(0.6 0.19 256 / 15%); color:var(--primary); }
+  .detail .d-ico svg{ width:1.25rem; height:1.25rem; }
+  .detail .d-label{ font-size:.75rem; font-weight:600; text-transform:uppercase; letter-spacing:.14em; color:var(--muted-foreground); }
+  .detail .d-val{ font-size:.875rem; font-weight:500; }
+  .note{ border-radius:1rem; border:1px solid oklch(0.6 0.19 256 / 25%); background:oklch(0.6 0.19 256 / 5%); padding:1.5rem; font-size:.875rem; color:var(--muted-foreground); }
+  form.contact{ border-radius:1rem; padding:1.5rem; }
+  @media(min-width:768px){ form.contact{ padding:2rem; } }
+  .field{ display:flex; flex-direction:column; gap:.5rem; margin-bottom:1.25rem; }
+  .field label{ font-size:.875rem; font-weight:500; color:oklch(0.98 0.005 260 / 90%); }
+  .field input, .field textarea{ border-radius:.5rem; border:1px solid var(--input); background:oklch(0.16 0.028 264 / 60%); padding:.75rem 1rem; font-size:.875rem; color:var(--foreground); font-family:inherit; outline:none; transition:.15s; }
+  .field textarea{ resize:none; }
+  .field input:focus, .field textarea:focus{ border-color:var(--primary); box-shadow:0 0 0 2px oklch(0.6 0.19 256 / 30%); }
+  .form-done{ display:flex; flex-direction:column; align-items:center; gap:1rem; border-radius:1rem; padding:2.5rem; text-align:center; }
+  .form-done .ok{ width:3.5rem; height:3.5rem; display:flex; align-items:center; justify-content:center; border-radius:9999px; background:oklch(0.6 0.19 256 / 15%); color:var(--primary); }
+  .form-done .ok svg{ width:1.75rem; height:1.75rem; }
+  .form-done h2{ font-size:1.25rem; }
+  .form-done p{ max-width:24rem; font-size:.875rem; color:var(--muted-foreground); }
+
+  /* Footer */
+  footer{ border-top:1px solid oklch(1 0 0 / 7%); }
+  .foot-grid{ display:grid; gap:2.5rem; padding:3.5rem 0; }
+  @media(min-width:768px){ .foot-grid{ grid-template-columns:repeat(3,1fr); } }
+  .foot-desc{ margin-top:1rem; max-width:20rem; font-size:.875rem; color:var(--muted-foreground); }
+  .foot-h{ font-size:.75rem; font-weight:600; text-transform:uppercase; letter-spacing:.16em; color:var(--muted-foreground); }
+  .foot-list{ margin-top:1rem; list-style:none; display:flex; flex-direction:column; gap:.65rem; font-size:.875rem; color:var(--muted-foreground); }
+  .foot-list a:hover{ color:var(--foreground); }
+  .foot-list .row{ display:flex; align-items:center; gap:.65rem; }
+  .foot-list svg{ width:1rem; height:1rem; color:var(--primary); }
+  .foot-bottom{ display:flex; flex-direction:column; align-items:center; justify-content:space-between; gap:.75rem; border-top:1px solid oklch(1 0 0 / 7%); padding:1.5rem 0; font-size:.75rem; color:var(--muted-foreground); }
+  @media(min-width:768px){ .foot-bottom{ flex-direction:row; } }
+  .foot-bottom a{ transition:.15s; }
+  .foot-bottom a:hover{ color:var(--foreground); }
+  .spin{ animation:spin 1s linear infinite; }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+</style>
 </head>
-<body class="min-h-screen">
+<body>
 
-  <!-- NAVBAR -->
-  <header class="fixed inset-x-0 top-0 z-50">
-    <div id="navbar" class="border-b border-transparent bg-transparent transition-all duration-300">
-      <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <a href="#top" aria-label="OP DE KAART home" class="flex items-center gap-3">
-          <img src="MARKETING-zomergem.jpg" alt="OP DE KAART Logo" class="h-8 w-auto object-contain" />
-          <div class="leading-none">
-            <p class="text-lg font-extrabold tracking-[0.14em] text-white">OP DE KAART</p>
-            <p class="mt-1 text-[10px] font-medium tracking-[0.28em] text-white/45">GOOGLE BEHEER &amp; REVIEWBESCHERMING</p>
-          </div>
-        </a>
+<!-- ================= HEADER ================= -->
+<header>
+  <div class="wrap nav-row">
+    <a class="logo" href="#" onclick="showPage('home');return false;" aria-label="OP DE KAART — naar de homepagina">
+      <!-- LOGO PLACEHOLDER: zet je eigen logo-bestand als "logo.jpg" in dezelfde map als dit HTML-bestand.
+           Zodra dat bestand aanwezig is, verschijnt het automatisch hier. Tot dan blijft het huidige icoon zichtbaar. -->
+      <span class="logo-badge">
+        <img src="logo.jpg" alt="OP DE KAART logo" class="logo-img" onerror="this.style.display='none';">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+      </span>
+      <span>
+        <span class="logo-name" style="display:block">OP DE KAART</span>
+        <span class="logo-sub">Google beheer &amp; reviewbescherming</span>
+      </span>
+    </a>
 
-        <div class="hidden items-center gap-1 md:flex">
-          <a href="#werkwijze" class="nav-link rounded-full px-4 py-2 text-sm font-medium text-slate-300 transition-all duration-200 hover:bg-white/5 hover:text-white">Werkwijze</a>
-          <a href="#tarieven" class="nav-link rounded-full px-4 py-2 text-sm font-medium text-slate-300 transition-all duration-200 hover:bg-white/5 hover:text-white">Tarieven</a>
-          <a href="#contact" class="nav-link rounded-full px-4 py-2 text-sm font-medium text-slate-300 transition-all duration-200 hover:bg-white/5 hover:text-white">Contact</a>
-        </div>
+    <nav class="main" aria-label="Hoofdnavigatie">
+      <a onclick="showPage('home')">Home</a>
+      <a onclick="showPage('home','wat-doen-we')">Wat doen we</a>
+      <a onclick="showPage('home','aanbod-en-prijs')">Aanbod en prijs</a>
+      <a onclick="showPage('over')">Over ons</a>
+    </nav>
 
-        <div class="hidden md:block">
-          <a href="#contact" class="group inline-flex items-center gap-2 rounded-full bg-[#007aff] px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-[#0a84ff] glow-blue">
-            Krijg meer klanten
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    <div style="display:flex;align-items:center;gap:.75rem">
+      <a class="btn btn-primary header-cta" onclick="showPage('contact')">Contact — gratis scan</a>
+      <button class="menu-btn" aria-label="Menu openen" aria-expanded="false" onclick="toggleMenu(this)">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobiele navigatie">
+    <a onclick="showPage('home');closeMenu()">Home</a>
+    <a onclick="showPage('home','wat-doen-we');closeMenu()">Wat doen we</a>
+    <a onclick="showPage('home','aanbod-en-prijs');closeMenu()">Aanbod en prijs</a>
+    <a onclick="showPage('over');closeMenu()">Over ons</a>
+    <a class="btn btn-primary" style="margin-top:.5rem" onclick="showPage('contact');closeMenu()">Contact — gratis scan</a>
+  </nav>
+</header>
+
+<!-- ================= HOME ================= -->
+<div class="page active" id="page-home">
+  <!-- Hero -->
+  <section class="bg-grid" style="overflow:hidden">
+    <div class="glow" style="top:-10rem;left:50%;transform:translateX(-50%);height:520px;width:820px"></div>
+    <div class="wrap hero-grid">
+      <div>
+        <span class="badge">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9 16.5 13.5 18.5 21 12 16.5 5.5 21 7.5 13.5 2 9 9 9"/></svg>
+          Lokale groeispecialist voor Vlaamse zaken
+        </span>
+        <h1>Google-optimalisatie en <span class="primary-text">review-software</span> voor lokale zaken.</h1>
+        <p class="lead">Wij doen eigenlijk maar twee dingen, maar we doen ze goed: we richten jouw Google Bedrijfsprofiel technisch perfect in, en we installeren een simpel systeem om automatisch en veilig nieuwe reviews te verzamelen. Zo klopt jouw online visitekaartje helemaal — zonder dat jij moet uitzoeken hoe Google werkt.</p>
+        <div class="hero-btns">
+          <a class="btn btn-primary" onclick="showPage('home','aanbod-en-prijs')">Bekijk ons aanbod
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
+          <a class="btn btn-ghost" onclick="showPage('contact')">Vraag een gratis profiel-scan aan</a>
         </div>
-
-        <button id="menuBtn" class="flex h-10 w-10 items-center justify-center rounded-lg text-white md:hidden" aria-label="Menu openen">
-          <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
-          <svg id="closeIcon" xmlns="http://www.w3.org/2000/svg" class="hidden h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-        </button>
-      </nav>
-
-      <div id="mobileMenu" class="hidden border-t border-white/10 bg-[#040b14]/95 px-6 py-4 md:hidden">
-        <div class="flex flex-col gap-4">
-          <a href="#werkwijze" class="mobile-link text-base font-medium text-white/80">Werkwijze</a>
-          <a href="#tarieven" class="mobile-link text-base font-medium text-white/80">Tarieven</a>
-          <a href="#contact" class="mobile-link text-base font-medium text-white/80">Contact</a>
-          <a href="#contact" class="mobile-link mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-[#007aff] px-5 py-3 text-sm font-semibold text-white glow-blue">
-            Krijg meer klanten
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </a>
+        <ul class="highlights">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><span>Beter gevonden in de buurt</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 9 5 12 1.8-5.2L21 14Z"/><path d="M7.2 2.2 8 5.1"/><path d="m5.1 8-2.9-.8"/><path d="M14 4.1 12 6"/><path d="m6 12-1.9 2"/></svg><span>Meer websiteklikken</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg><span>Meer telefoontjes</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15 9 22 9 16.5 13.5 18.5 21 12 16.5 5.5 21 7.5 13.5 2 9 9 9"/></svg><span>Meer &amp; betere reviews</span></li>
+        </ul>
+      </div>
+      <div class="hero-visual">
+        <div class="glow" style="inset:0;transform:translate(1.5rem,1.5rem);filter:blur(2rem);background:oklch(0.6 0.19 256 / 15%)"></div>
+        <div class="frame">
+          <!-- AFBEELDING PLACEHOLDER: plaats "hero-google-profile.png" in dezelfde map als dit bestand -->
+          <img src="hero-google-profile.png" alt="Laptop en smartphone met een geoptimaliseerd Google Bedrijfsprofiel met reviews en kaart" onerror="this.outerHTML='&lt;div class=&quot;hero-fallback&quot;&gt;Ruimte voor een visual van een geoptimaliseerd Google Bedrijfsprofiel&lt;/div&gt;'">
         </div>
       </div>
     </div>
-  </header>
+  </section>
 
-  <main>
-    <!-- HERO -->
-    <section id="top" class="relative overflow-hidden bg-grid pt-32 pb-14 md:pt-36 md:pb-16">
-      <div class="pointer-events-none absolute -top-40 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-[#007aff]/25 blur-[140px]"></div>
-      <div class="pointer-events-none absolute right-0 top-1/3 h-[380px] w-[380px] rounded-full bg-[#007aff]/10 blur-[120px]"></div>
+  <!-- Wat doen we -->
+  <section id="wat-doen-we" class="section-pad" style="scroll-margin-top:6rem">
+    <div class="wrap">
+      <div class="heading">
+        <span class="eyebrow">Wat doen we</span>
+        <h2>Je levert goed werk — wij zorgen dat Google dat ook blijft zien.</h2>
+        <p class="muted">We spreken dagelijks met lokale ondernemers. Ze leveren topkwaliteit, maar hebben simpelweg de tijd niet om elke dag met Google bezig te zijn. Meestal zien we daarbij twee scenario's.</p>
+      </div>
+      <div class="cards-2">
+        <article class="glass card">
+          <div style="display:flex;align-items:center;gap:.75rem">
+            <span class="card-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+            <span class="tag">Situatie 1</span>
+          </div>
+          <h3>Je hebt een profiel, maar het ligt stil.</h3>
+          <p>Je hebt ooit wel een Google-profiel geclaimd, maar door de drukte in je zaak is het blijven liggen. Je merkt dat collega's uit de buurt net iets makkelijker gevonden worden. Er is ruimte voor verbetering, maar je mist de tijd of technische kennis om uit te zoeken hoe je dat profiel écht in jouw voordeel laat werken.</p>
+        </article>
+        <article class="glass card">
+          <div style="display:flex;align-items:center;gap:.75rem">
+            <span class="card-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span>
+            <span class="tag">Situatie 2</span>
+          </div>
+          <h3>Je bent al goed bezig, maar wil het beheer uitbesteden.</h3>
+          <p>Je profiel ziet er netjes uit en je hebt al een mooi aantal reviews. Je snapt hoe belangrijk Google is. Hier komen wij in beeld om je nóg sterker te maken: we passen de nieuwste lokale SEO-technieken toe, automatiseren je reviews en nemen het beheer over, zodat jij je handen vrij hebt.</p>
+        </article>
+      </div>
+      <div class="callout">
+        <p>Hoe dan ook: wij helpen je vooruit. Of je nu de basis nog goed moet zetten, of het beheer wil uitbesteden om tijd te besparen — <strong>OP DE KAART</strong> zorgt dat je online visitekaartje professioneel meedraait.</p>
+      </div>
+    </div>
+  </section>
 
-      <div class="relative mx-auto grid max-w-7xl items-center gap-14 px-6 lg:grid-cols-2">
+  <!-- Aanbod en prijs -->
+  <section id="aanbod-en-prijs" class="bg-grid section-pad" style="scroll-margin-top:6rem">
+    <div class="wrap">
+      <div class="heading">
+        <span class="eyebrow">Aanbod en prijs</span>
+        <h2>Kies de aanpak die bij jouw zaak past.</h2>
+        <p class="muted">Je levert elke dag vakwerk. Wij zorgen dat mensen in de buurt dat ook online zien. Of je nu de basis goed wil zetten, of het beheer volledig uit handen wil geven — heldere prijzen, zonder kleine lettertjes.</p>
+      </div>
+      <div class="plans" id="plans"></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section-pad">
+    <div class="wrap faq-wrap">
+      <div class="heading">
+        <span class="eyebrow">FAQ</span>
+        <h2>Veelgestelde vragen</h2>
+      </div>
+      <div class="faq-list" id="faqList"></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section>
+    <div class="wrap">
+      <div class="cta-banner">
+        <div class="glow" style="top:-6rem;left:50%;transform:translateX(-50%);height:16rem;width:640px;background:oklch(0.6 0.19 256 / 25%);filter:blur(120px)"></div>
+        <div style="position:relative">
+          <h2>Benieuwd hoe jouw zaak er online voorstaat?</h2>
+          <p class="lead" style="margin-left:auto;margin-right:auto">Vraag een gratis profiel-scan aan. Ik bekijk je huidige profiel en geef eerlijk advies over waar de kansen liggen — zonder verplichtingen.</p>
+          <div class="cta-btns">
+            <a class="btn btn-primary" onclick="showPage('contact')">Vraag je gratis scan aan
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <a class="btn btn-ghost" onclick="showPage('home','aanbod-en-prijs')">Bekijk het aanbod</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= OVER ONS ================= -->
+<div class="page" id="page-over">
+  <section class="bg-grid section-pad">
+    <div class="wrap about">
+      <span class="eyebrow">Over ons</span>
+      <div class="about-grid">
+        <div class="photo">
+          <div class="glow" style="inset:0;transform:translate(1.25rem,1.25rem);filter:blur(2rem);background:oklch(0.6 0.19 256 / 15%)"></div>
+          <!-- FOTO PLACEHOLDER: plaats "milan-foto.jpg" in dezelfde map als dit bestand en de foto verschijnt automatisch -->
+          <div class="box">
+            <img src="milan-foto.jpg" alt="Foto van Milan, oprichter van OP DE KAART" class="about-photo-img" onerror="this.style.display='none';">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.09-3.09a2 2 0 0 0-2.82 0L6 21"/></svg>
+            <p>Ruimte voor een professionele, spontane foto van Milan</p>
+          </div>
+        </div>
         <div>
-          <div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium text-white/70 backdrop-blur">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 fill-[#007aff] text-[#007aff]" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            Lokale groeispecialist voor Lievegem &amp; Gent
+          <h1>Wie zit er achter OP DE KAART?</h1>
+          <div class="about-text">
+            <p>Hallo, ik ben Milan. Als student-zelfstandige, in combinatie met mijn masteropleiding Management en Informatica aan de UGent, merkte ik de laatste jaren iets op. In Vlaanderen zijn er heel wat sterke lokale zaken — vakmensen die elke dag topkwaliteit afleveren, maar die simpelweg de tijd niet hebben om echt focus te leggen op Google en hun online zichtbaarheid.</p>
+            <p>Ik vind dat zonde, en net daarom ben ik OP DE KAART gestart. Geen groot, onpersoonlijk marketingbureau waar je het zoveelste nummertje bent, maar gewoon een nuchtere partner die met je meedenkt.</p>
+            <p>Ik voorzie voor jouw zaak het volledige plaatje: van de eerste technische opzet tot het vlotte beheer van je profiel en reviews. Daarbij waarborg ik altijd persoonlijk contact. We zitten samen aan tafel, bekijken eerlijk wat jouw zaak nodig heeft, en ik zorg dat het netjes geregeld wordt. Jij focust op je klanten, ik zorg dat Google voor jou werkt.</p>
           </div>
-
-          <h1 class="mt-6 text-balance text-5xl font-extrabold leading-[1.05] tracking-tight text-white md:text-6xl">
-            Google Maps.<br />
-            <span class="text-[#007aff] glow-text">Lokale zichtbaarheid.</span><br />
-            Meer klanten.
-          </h1>
-
-          <p class="mt-6 max-w-md text-pretty text-lg leading-relaxed text-white/60">
-            Wij positioneren jouw zaak bovenaan in Google Maps, automatiseren je reviewproces en bewaken je online reputatie. Zo bouw je aan structurele lokale autoriteit — en een voorspelbare stroom nieuwe klanten.
-          </p>
-
-          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a href="#contact" class="group inline-flex items-center justify-center gap-2 rounded-full bg-[#007aff] px-7 py-3.5 text-base font-semibold text-white transition-all hover:bg-[#0a84ff] glow-blue">
-              Plan een strategiegesprek
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          <ul class="values">
+            <li><span class="v-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 12 5.12 2.2"/><path d="m13 12 5.88-9.8"/><path d="M8 7h8"/><circle cx="12" cy="17" r="5"/><path d="M12 18v-2h-.5"/></svg></span>Persoonlijk contact, geen nummertje</li>
+            <li><span class="v-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></span>Master Management &amp; Informatica (UGent)</li>
+            <li><span class="v-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>Actief bij lokale zaken in Vlaanderen</li>
+          </ul>
+          <div class="hero-btns">
+            <a class="btn btn-primary" onclick="showPage('home','aanbod-en-prijs')">Bekijk het aanbod
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
-            <a href="#tarieven" class="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-7 py-3.5 text-base font-semibold text-white backdrop-blur transition-colors hover:bg-white/10">
-              Bekijk tarieven
-            </a>
-          </div>
-
-          <div class="mt-10 grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-4">
-            <div class="flex flex-col gap-2">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#007aff]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
-              <span class="text-sm font-medium leading-snug text-white/70">Beter gevonden in de buurt</span>
-            </div>
-            <div class="flex flex-col gap-2">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#007aff]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4.1 12 6"/><path d="m5.1 8-2.9-.8"/><path d="m6 12-1.9 2"/><path d="M7.2 2.2 8 5.1"/><path d="M9.037 9.69a.498.498 0 0 1 .653-.653l11 4.5a.5.5 0 0 1-.074.949l-4.349 1.041a1 1 0 0 0-.74.739l-1.04 4.35a.5.5 0 0 1-.95.074z"/></svg>
-              <span class="text-sm font-medium leading-snug text-white/70">Meer websiteklikken</span>
-            </div>
-            <div class="flex flex-col gap-2">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#007aff]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.32 6.153z"/></svg>
-              <span class="text-sm font-medium leading-snug text-white/70">Meer telefoontjes</span>
-            </div>
-            <div class="flex flex-col gap-2">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#007aff]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg>
-              <span class="text-sm font-medium leading-snug text-white/70">Meer klanten</span>
-            </div>
+            <a class="btn btn-ghost" onclick="showPage('contact')">Neem contact op</a>
           </div>
         </div>
-
-        <div class="relative animate-float">
-          <div class="pointer-events-none absolute inset-0 -z-10 rounded-3xl bg-[#007aff]/20 blur-3xl"></div>
-          <div class="overflow-hidden rounded-3xl border border-white/10 glass shadow-2xl">
-            <img src="ChatGPT Image 13 sep 2026, 20_55_37.png" alt="Voorbeeld van een geoptimaliseerd Google Maps-profiel op laptop en smartphone met vijfsterrenreviews" class="h-auto w-full" />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- DIVIDER -->
-    <div class="mx-auto max-w-7xl px-6"><div class="h-px w-full bg-gradient-to-r from-transparent via-blue-500/20 to-transparent"></div></div>
-
-    <!-- WERKWIJZE -->
-    <section id="werkwijze" class="relative py-12 md:py-16">
-      <div class="mx-auto max-w-7xl px-6">
-        <div class="mx-auto max-w-2xl text-center">
-          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-[#007aff]">Bewezen methodiek</p>
-          <h2 class="mt-4 text-balance text-4xl font-extrabold tracking-tight text-white md:text-5xl">Van onzichtbaar naar marktleider in 3 stappen</h2>
-          <p class="mt-5 text-lg text-white/60">Een gestructureerde aanpak die jouw zaak duurzaam bovenaan in Google Maps positioneert — en die positie verdedigt.</p>
-        </div>
-
-        <div class="mt-12 grid gap-6 md:grid-cols-3">
-          <!-- Stap 1 -->
-          <div class="group relative flex flex-col overflow-hidden rounded-3xl glass p-8 transition-all duration-300 hover:-translate-y-1 hover:border-[#007aff]/40">
-            <span class="card-number pointer-events-none absolute -right-2 -top-6 select-none text-[7rem] font-black leading-none tracking-tighter text-[#007aff]/10">01</span>
-            <div class="step-icon relative flex h-14 w-14 items-center justify-center rounded-2xl bg-[#007aff]/15 text-[#007aff] ring-1 ring-inset ring-[#007aff]/30">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
-            </div>
-            <h3 class="relative mt-6 text-xl font-bold text-white">Profiel optimaliseren</h3>
-            <p class="relative mt-3 text-sm leading-relaxed text-white/60">We stemmen je Google Bedrijfsprofiel tot in detail af op lokale SEO: correcte categorieën, gerichte zoekwoorden, professionele beeldtaal en volledige bedrijfsgegevens.</p>
-            <ul class="relative mt-6 space-y-2.5 border-t border-white/10 pt-6">
-              <li class="flex items-center gap-2.5 text-sm text-white/75"><span class="h-1.5 w-1.5 rounded-full bg-[#007aff]"></span>Lokale SEO &amp; categorieën</li>
-              <li class="flex items-center gap-2.5 text-sm text-white/75"><span class="h-1.5 w-1.5 rounded-full bg-[#007aff]"></span>Zoekwoorden &amp; beschrijving</li>
-              <li class="flex items-center gap-2.5 text-sm text-white/75"><span class="h-1.5 w-1.5 rounded-full bg-[#007aff]"></span>Foto’s &amp; bedrijfsinfo</li>
-            </ul>
-          </div>
-          <!-- Stap 2 -->
-          <div class="group relative flex flex-col overflow-hidden rounded-3xl glass p-8 transition-all duration-300 hover:-translate-y-1 hover:border-[#007aff]/40">
-            <span class="card-number pointer-events-none absolute -right-2 -top-6 select-none text-[7rem] font-black leading-none tracking-tighter text-[#007aff]/10">02</span>
-            <div class="step-icon relative flex h-14 w-14 items-center justify-center rounded-2xl bg-[#007aff]/15 text-[#007aff] ring-1 ring-inset ring-[#007aff]/30">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
-            </div>
-            <h3 class="relative mt-6 text-xl font-bold text-white">Reviews automatiseren</h3>
-            <p class="relative mt-3 text-sm leading-relaxed text-white/60">Onze software genereert doorlopend nieuwe reviews, ondervangt negatieve feedback vóór publicatie en verankert zo een betrouwbare online reputatie.</p>
-            <ul class="relative mt-6 space-y-2.5 border-t border-white/10 pt-6">
-              <li class="flex items-center gap-2.5 text-sm text-white/75"><span class="h-1.5 w-1.5 rounded-full bg-[#007aff]"></span>Automatische uitnodigingen</li>
-              <li class="flex items-center gap-2.5 text-sm text-white/75"><span class="h-1.5 w-1.5 rounded-full bg-[#007aff]"></span>Slimme filtering</li>
-              <li class="flex items-center gap-2.5 text-sm text-white/75"><span class="h-1.5 w-1.5 rounded-full bg-[#007aff]"></span>Reputatiebescherming</li>
-            </ul>
-          </div>
-          <!-- Stap 3 -->
-          <div class="group relative flex flex-col overflow-hidden rounded-3xl glass p-8 transition-all duration-300 hover:-translate-y-1 hover:border-[#007aff]/40">
-            <span class="card-number pointer-events-none absolute -right-2 -top-6 select-none text-[7rem] font-black leading-none tracking-tighter text-[#007aff]/10">03</span>
-            <div class="step-icon relative flex h-14 w-14 items-center justify-center rounded-2xl bg-[#007aff]/15 text-[#007aff] ring-1 ring-inset ring-[#007aff]/30">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
-            </div>
-            <h3 class="relative mt-6 text-xl font-bold text-white">Onderhouden &amp; sturen</h3>
-            <p class="relative mt-3 text-sm leading-relaxed text-white/60">We houden je profiel doorlopend actief met strategische posts, verse beelden en heldere rapportage — zodat je positie blijft versterken.</p>
-            <ul class="relative mt-6 space-y-2.5 border-t border-white/10 pt-6">
-              <li class="flex items-center gap-2.5 text-sm text-white/75"><span class="h-1.5 w-1.5 rounded-full bg-[#007aff]"></span>Wekelijkse posts</li>
-              <li class="flex items-center gap-2.5 text-sm text-white/75"><span class="h-1.5 w-1.5 rounded-full bg-[#007aff]"></span>Statistieken &amp; rapportage</li>
-              <li class="flex items-center gap-2.5 text-sm text-white/75"><span class="h-1.5 w-1.5 rounded-full bg-[#007aff]"></span>Foto-updates</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- DIVIDER -->
-    <div class="mx-auto max-w-7xl px-6"><div class="h-px w-full bg-gradient-to-r from-transparent via-blue-500/20 to-transparent"></div></div>
-
-    <!-- TARIEVEN -->
-    <section id="tarieven" class="relative py-12 md:py-16">
-      <div class="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#007aff]/10 blur-[150px]"></div>
-      <div class="relative mx-auto max-w-7xl px-6">
-        <div class="mx-auto max-w-2xl text-center">
-          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-[#007aff]">Tarieven</p>
-          <h2 class="mt-4 text-balance text-4xl font-extrabold tracking-tight text-white md:text-5xl">Investeringen afgestemd op jouw ambitie</h2>
-          <p class="mt-5 text-lg text-white/60">Transparante tarieven, geen verborgen kosten en maandelijks opzegbaar. Volledige controle, altijd.</p>
-        </div>
-
-        <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-          <!-- Plan 1 -->
-          <div class="relative flex flex-col rounded-3xl p-8 transition-all duration-300 glass hover:-translate-y-1 hover:border-white/20">
-            <h3 class="text-base font-bold text-white">Eenmalige Optimalisatie</h3>
-            <p class="mt-1 text-xs text-white/45">Perfect voor een sterke basis</p>
-            <div class="mt-6 flex items-end gap-1"><span class="text-4xl font-extrabold text-white">€300</span><span class="mb-1 text-sm font-medium text-white/50">eenmalig</span></div>
-            <p class="mt-1 h-5 text-sm font-medium text-[#3b9bff]"></p>
-            <ul class="mt-6 flex-1 space-y-3 border-t border-white/10 pt-6">
-              <li class="flex items-start gap-2.5 text-sm text-white/75"><svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-4 w-4 shrink-0 text-white/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Volledige profieloptimalisatie</li>
-              <li class="flex items-start gap-2.5 text-sm text-white/75"><svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-4 w-4 shrink-0 text-white/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Lokale SEO &amp; categorieën</li>
-              <li class="flex items-start gap-2.5 text-sm text-white/75"><svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-4 w-4 shrink-0 text-white/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Zoekwoorden &amp; beschrijving</li>
-              <li class="flex items-start gap-2.5 text-sm text-white/75"><svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-4 w-4 shrink-0 text-white/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Foto’s &amp; bedrijfsgegevens</li>
-            </ul>
-            <a href="#contact" class="mt-8 inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold transition-all border border-white/15 bg-white/5 text-white hover:bg-white/10">Kies dit pakket</a>
-          </div>
-          <!-- Plan 2 -->
-          <div class="relative flex flex-col rounded-3xl p-8 transition-all duration-300 glass hover:-translate-y-1 hover:border-white/20">
-            <h3 class="text-base font-bold text-white">Review Software</h3>
-            <p class="mt-1 text-xs text-white/45">Basispakket</p>
-            <div class="mt-6 flex items-end gap-1"><span class="text-4xl font-extrabold text-white">€45</span><span class="mb-1 text-sm font-medium text-white/50">/mnd</span></div>
-            <p class="mt-1 h-5 text-sm font-medium text-[#3b9bff]">+ €250 setup</p>
-            <ul class="mt-6 flex-1 space-y-3 border-t border-white/10 pt-6">
-              <li class="flex items-start gap-2.5 text-sm text-white/75"><svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-4 w-4 shrink-0 text-white/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Automatische review-uitnodigingen</li>
-              <li class="flex items-start gap-2.5 text-sm text-white/75"><svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-4 w-4 shrink-0 text-white/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Negatieve reviews filteren</li>
-              <li class="flex items-start gap-2.5 text-sm text-white/75"><svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-4 w-4 shrink-0 text-white/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Reputatiebescherming</li>
-              <li class="flex items-start gap-2.5 text-sm text-white/75"><svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-4 w-4 shrink-0 text-white/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Maandelijkse rapportage</li>
-            </ul>
-            <a href="#contact" class="mt-8 inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold transition-all border border-white/15 bg-white/5 text-white hover:bg-white/10">Kies dit pakket</a>
-          </div>
-          <!-- Plan 3 -->
-          <div class="relative flex flex-col rounded-3xl p-8 transition-all duration-300 glass hover:-translate-y-1 hover:border-white/20">
-            <h3 class="text-base font-bold text-white">Google Beheer</h3>
-            <p class="mt-1 text-xs text-white/45">Basispakket</p>
-            <div class="mt-6 flex items-end gap-1"><span class="text-4xl font-extrabold text-white">€64</span><span class="mb-1 text-sm font-medium text-white/50">/mnd</span></div>
-            <p class="mt-1 h-5 text-sm font-medium text-[#3b9bff]">+ €250 setup</p>
-            <ul class="mt-6 flex-1 space-y-3 border-t border-white/10 pt-6">
-              <li class="flex items-start gap-2.5 text-sm text-white/75"><svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-4 w-4 shrink-0 text-white/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Wekelijkse Google-posts</li>
-              <li class="flex items-start gap-2.5 text-sm text-white/75"><svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-4 w-4 shrink-0 text-white/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Foto- &amp; info-updates</li>
-              <li class="flex items-start gap-2.5 text-sm text-white/75"><svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-4 w-4 shrink-0 text-white/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Statistieken &amp; inzichten</li>
-              <li class="flex items-start gap-2.5 text-sm text-white/75"><svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-4 w-4 shrink-0 text-white/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Doorlopende optimalisatie</li>
-            </ul>
-            <a href="#contact" class="mt-8 inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold transition-all border border-white/15 bg-white/5 text-white hover:bg-white/10">Kies dit pakket</a>
-          </div>
-          <!-- Plan 4 (featured) -->
-          <div class="relative flex flex-col rounded-3xl p-8 transition-all duration-300 glass glow-blue border-[#007aff]/50 xl:-translate-y-3">
-            <div class="absolute -top-3.5 left-1/2 inline-flex -translate-x-1/2 items-center gap-1.5 rounded-full bg-[#007aff] px-4 py-1.5 text-xs font-bold text-white glow-blue">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>
-              Meest gekozen
-            </div>
-            <h3 class="text-base font-bold text-white">Totaalpakket</h3>
-            <p class="mt-1 text-xs text-white/45">Beheer én reviews gecombineerd</p>
-            <div class="mt-6 flex items-end gap-1"><span class="text-4xl font-extrabold text-white">€92</span><span class="mb-1 text-sm font-medium text-white/50">/mnd</span></div>
-            <p class="mt-1 h-5 text-sm font-medium text-[#3b9bff]">+ €250 setup</p>
-            <ul class="mt-6 flex-1 space-y-3 border-t border-white/10 pt-6">
-              <li class="flex items-start gap-2.5 text-sm text-white/75"><svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-4 w-4 shrink-0 text-[#007aff]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Alles uit Google Beheer</li>
-              <li class="flex items-start gap-2.5 text-sm text-white/75"><svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-4 w-4 shrink-0 text-[#007aff]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Alles uit Review Software</li>
-              <li class="flex items-start gap-2.5 text-sm text-white/75"><svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-4 w-4 shrink-0 text-[#007aff]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Volledige reputatiebescherming</li>
-              <li class="flex items-start gap-2.5 text-sm text-white/75"><svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-4 w-4 shrink-0 text-[#007aff]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Prioritaire support</li>
-            </ul>
-            <a href="#contact" class="mt-8 inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold transition-all bg-[#007aff] text-white hover:bg-[#0a84ff] glow-blue">Start nu</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- DIVIDER -->
-    <div class="mx-auto max-w-7xl px-6"><div class="h-px w-full bg-gradient-to-r from-transparent via-blue-500/20 to-transparent"></div></div>
-
-    <!-- CONTACT -->
-    <section id="contact" class="relative py-12 md:py-16">
-      <div class="mx-auto max-w-3xl px-6">
-        <div class="relative overflow-hidden rounded-[2rem] glass p-8 glow-blue md:p-12">
-          <div class="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[#007aff]/20 blur-3xl"></div>
-
-          <div class="relative text-center">
-            <p class="text-sm font-semibold uppercase tracking-[0.2em] text-[#007aff]">Contact</p>
-            <h2 class="mt-4 text-balance text-3xl font-extrabold tracking-tight text-white md:text-4xl">Klaar om lokaal marktleider te worden?</h2>
-            <p class="mt-4 text-white/60">Laat je gegevens achter voor een vrijblijvend strategiegesprek. We analyseren je huidige positie en tonen je concrete groeikansen.</p>
-          </div>
-
-          <form id="contactForm" class="relative mt-10 space-y-5">
-            <div>
-              <label for="naam" class="mb-2 block text-sm font-medium text-white/70">Naam</label>
-              <input id="naam" name="naam" type="text" required placeholder="Jouw naam" class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 text-white placeholder:text-white/30 outline-none transition-all focus:border-[#007aff]/60 focus:ring-2 focus:ring-[#007aff]/30" />
-            </div>
-            <div>
-              <label for="email" class="mb-2 block text-sm font-medium text-white/70">E-mailadres</label>
-              <input id="email" name="email" type="email" required placeholder="naam@voorbeeld.be" class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 text-white placeholder:text-white/30 outline-none transition-all focus:border-[#007aff]/60 focus:ring-2 focus:ring-[#007aff]/30" />
-            </div>
-            <div>
-              <label for="zaak" class="mb-2 block text-sm font-medium text-white/70">Naam van de zaak</label>
-              <input id="zaak" name="zaak" type="text" required placeholder="Bijv. De Zandpoort" class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 text-white placeholder:text-white/30 outline-none transition-all focus:border-[#007aff]/60 focus:ring-2 focus:ring-[#007aff]/30" />
-            </div>
-            <button type="submit" class="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#007aff] px-7 py-4 text-base font-semibold text-white transition-all hover:bg-[#0a84ff] glow-blue">
-              Verstuur Aanvraag
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </button>
-          </form>
-
-          <div id="contactSuccess" class="relative mt-10 hidden flex-col items-center gap-4 rounded-2xl border border-[#007aff]/30 bg-[#007aff]/10 px-6 py-10 text-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-[#007aff]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg>
-            <p class="text-lg font-semibold text-white">Bedankt! We nemen snel contact met je op.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="border-t border-white/10 bg-[#040b14]">
-    <div class="mx-auto max-w-7xl px-6 py-12">
-      <div class="flex flex-col items-center gap-6 text-center md:flex-row md:justify-between md:text-left">
-        <div class="flex flex-col items-center gap-4 md:items-start">
-          <div class="flex items-center gap-3">
-            <img src="MARKETING-zomergem.jpg" alt="OP DE KAART Logo" class="h-8 w-auto object-contain" />
-            <div class="leading-none">
-              <p class="text-lg font-extrabold tracking-[0.14em] text-white">OP DE KAART</p>
-              <p class="mt-1 text-[10px] font-medium tracking-[0.28em] text-white/45">GOOGLE BEHEER &amp; REVIEWBESCHERMING</p>
-            </div>
-          </div>
-          <p class="flex items-center gap-2 text-sm text-white/50">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-[#007aff]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
-            Actief in Lievegem, Gent &amp; omstreken
-          </p>
-        </div>
-        <nav class="flex gap-6 text-sm font-medium text-white/60">
-          <a href="#werkwijze" class="transition-colors hover:text-white">Werkwijze</a>
-          <a href="#tarieven" class="transition-colors hover:text-white">Tarieven</a>
-          <a href="#contact" class="transition-colors hover:text-white">Contact</a>
-        </nav>
-      </div>
-      <div class="mt-10 border-t border-white/10 pt-6 text-center text-xs text-white/40">
-        © 2026 OP DE KAART — Google beheer &amp; reviewbescherming. Alle rechten voorbehouden.
       </div>
     </div>
-  </footer>
+  </section>
+</div>
 
-  <script>
-    // Navbar scroll-effect
-    const navbar = document.getElementById('navbar');
-    const onScroll = () => {
-      if (window.scrollY > 12) {
-        navbar.classList.add('border-white/10', 'bg-[#040b14]/80', 'backdrop-blur-xl');
-        navbar.classList.remove('border-transparent', 'bg-transparent');
-      } else {
-        navbar.classList.remove('border-white/10', 'bg-[#040b14]/80', 'backdrop-blur-xl');
-        navbar.classList.add('border-transparent', 'bg-transparent');
-      }
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+<!-- ================= CONTACT ================= -->
+<div class="page" id="page-contact">
+  <section class="bg-grid section-pad">
+    <div class="wrap">
+      <div class="contact-head">
+        <span class="eyebrow">Contact</span>
+        <h1>Laten we kijken hoe jouw zaak online scoort.</h1>
+        <p class="lead">Vul het formulier in voor een gratis profiel-scan, of stel gewoon je vraag. Geen verkooppraatjes — gewoon eerlijk advies over waar de kansen voor jouw zaak liggen.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="details">
+          <div class="glass detail"><span class="d-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span><span><span class="d-label" style="display:block">E-mail</span><a class="d-val" href="mailto:milan@op-de-kaart.be">milan@op-de-kaart.be</a></span></div>
+          <div class="glass detail"><span class="d-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg></span><span><span class="d-label" style="display:block">Telefoon</span><a class="d-val" href="tel:+32495192457">+32 495 19 24 57</a></span></div>
+          <div class="glass detail"><span class="d-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span><span><span class="d-label" style="display:block">Regio</span><span class="d-val">Vlaanderen — lokaal actief</span></span></div>
+          <div class="glass detail"><span class="d-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><span><span class="d-label" style="display:block">Antwoord</span><span class="d-val">Binnen één werkdag</span></span></div>
+          <div class="note">Liever meteen aan de slag? Vermeld in je bericht welk pakket je interesse heeft, dan bereid ik ons gesprek gericht voor.</div>
+        </div>
 
-    // Mobiel menu
-    const menuBtn = document.getElementById('menuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const menuIcon = document.getElementById('menuIcon');
-    const closeIcon = document.getElementById('closeIcon');
-    const toggleMenu = (show) => {
-      mobileMenu.classList.toggle('hidden', !show);
-      menuIcon.classList.toggle('hidden', show);
-      closeIcon.classList.toggle('hidden', !show);
-    };
-    menuBtn.addEventListener('click', () => toggleMenu(mobileMenu.classList.contains('hidden')));
-    document.querySelectorAll('.mobile-link').forEach((l) => l.addEventListener('click', () => toggleMenu(false)));
+        <div id="formSlot">
+          <form class="glass contact" id="contactForm" onsubmit="submitForm(event)">
+            <div class="field"><label for="naam">Je naam</label><input id="naam" name="naam" type="text" required></div>
+            <div class="field"><label for="zaak">Naam van je zaak</label><input id="zaak" name="zaak" type="text" required></div>
+            <div class="field"><label for="email">E-mailadres</label><input id="email" name="email" type="email" required></div>
+            <div class="field"><label for="telefoon">Telefoonnummer</label><input id="telefoon" name="telefoon" type="tel" required></div>
+            <div class="field"><label for="profiel">Link naar je huidige Google-profiel (optioneel)</label><input id="profiel" name="profiel" type="url"></div>
+            <div class="field"><label for="bericht">Je vraag of opmerking</label><textarea id="bericht" name="bericht" rows="4" required></textarea></div>
+            <button type="submit" class="btn btn-primary" id="submitBtn">Vraag je gratis scan aan</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
 
-    // Contactformulier
-    document.getElementById('contactForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      e.target.classList.add('hidden');
-      const success = document.getElementById('contactSuccess');
-      success.classList.remove('hidden');
-      success.classList.add('flex');
-    });
-  </script>
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo">
+          <span class="logo-badge">
+            <img src="logo.jpg" alt="OP DE KAART logo" class="logo-img" onerror="this.style.display='none';">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          </span>
+          <span class="logo-name">OP DE KAART</span>
+        </div>
+        <p class="foot-desc">Lokaal beter gevonden worden. Wij richten je Google-profiel perfect in en verzamelen automatisch nieuwe reviews.</p>
+      </div>
+      <div>
+        <h3 class="foot-h">Navigatie</h3>
+        <ul class="foot-list">
+          <li><a onclick="showPage('home')">Home</a></li>
+          <li><a onclick="showPage('home','aanbod-en-prijs')">Aanbod en prijs</a></li>
+          <li><a onclick="showPage('over')">Over ons</a></li>
+          <li><a onclick="showPage('contact')">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="foot-h">Bedrijfsgegevens</h3>
+        <ul class="foot-list">
+          <li class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg><a href="mailto:milan@op-de-kaart.be">milan@op-de-kaart.be</a></li>
+          <li class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg><a href="tel:+32495192457">+32 495 19 24 57</a></li>
+          <li class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg><span>BTW BE1027521394</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p>© 2026 OP DE KAART. Alle rechten voorbehouden. — BTW BE1027521394</p>
+      <div style="display:flex;gap:1.25rem">
+        <!-- JURIDISCHE PAGINA'S PLACEHOLDER: vervang href="#" door de echte links zodra je Privacybeleid en Algemene Voorwaarden hebt opgesteld (bv. losse pagina's of PDF's) -->
+        <a href="#" title="Binnenkort beschikbaar">Privacybeleid</a>
+        <a href="#" title="Binnenkort beschikbaar">Algemene Voorwaarden</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ---- Pricing data ---- */
+  const plans = [
+    { name:'Eenmalige Optimalisatie', price:'€300', period:'eenmalig', setup:'',
+      forWho:"Je hebt een Google-profiel, maar er gebeurt weinig mee. Eén keer investeren om het helemaal goed te zetten — zonder maandelijkse kosten.",
+      features:['Volledige profieloptimalisatie','Juiste lokale zoekwoorden','Alle diensten netjes op een rij','Een online visitekaartje dat klopt'],
+      cta:'Kies eenmalige optimalisatie' },
+    { name:'Review Software', price:'€45', period:'/ maand', setup:'+ €250 setup (eenmalig)',
+      forWho:"Je klanten zijn supertevreden, maar vergeten vaak uit zichzelf een review te schrijven. Je wil meer sterren, zonder te moeten bedelen.",
+      features:['Automatische review-uitnodigingen','4 of 5 sterren direct naar Google','Mindere ervaring intern opgevangen','Je online reputatie beschermd'],
+      cta:'Start met review software' },
+    { name:'Google Beheer', price:'€64', period:'/ maand', setup:'+ €250 setup — incl. optimalisatie',
+      forWho:"Je weet dat online zichtbaarheid cruciaal is, maar je hebt simpelweg de tijd of energie niet om er elke week mee bezig te zijn.",
+      features:['Wekelijkse posts & updates','Actuele foto\u2019s toegevoegd','Reviews & vragen beantwoord','Sneller & hoger getoond in de buurt'],
+      cta:'Besteed je beheer uit' },
+    { name:'Het Totaalpakket', price:'€92', period:'/ maand', setup:'+ €250 setup — software én optimalisatie',
+      forWho:"Voor de ondernemer die lokaal écht wil opvallen en gewoon alle online zorgen uit handen wil geven.",
+      features:['Alles uit Review Software','Alles uit Google Beheer','Volautomatisch nieuwe reviews','Wekelijks profielbeheer'],
+      cta:'Ga voor het totaalpakket', featured:true },
+  ];
+  const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+  document.getElementById('plans').innerHTML = plans.map(p => `
+    <article class="plan ${p.featured?'featured':'glass'}">
+      ${p.featured?`<span class="ribbon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 3 1.9 5.8L20 9l-4.9 3.6L17 19l-5-3.7L7 19l1.9-6.4L4 9l6.1-.2z"/></svg>Meest gekozen</span>`:''}
+      <h3>${p.name}</h3>
+      <div class="price"><span class="amt">${p.price}</span><span class="per">${p.period}</span></div>
+      <p class="setup">${p.setup||'&nbsp;'}</p>
+      <p class="forwho">${p.forWho}</p>
+      <ul class="feat">${p.features.map(f=>`<li>${check}<span>${f}</span></li>`).join('')}</ul>
+      <div class="btn-spacer"></div>
+      <a class="btn ${p.featured?'btn-primary':'btn-ghost'}" onclick="showPage('contact')">${p.cta}</a>
+    </article>`).join('');
+
+  /* ---- FAQ ---- */
+  const faqs = [
+    { q:'Haal ik meer klanten uit Google dan uit Facebook of Instagram?', a:"Sociale media zijn fantastisch voor je naamsbekendheid, maar de intentie van je klant is helemaal anders. Mensen scrollen op Instagram voor hun ontspanning. Maar als iemand op Google zoekt naar een ‘kapper’, ‘loodgieter’ of ‘restaurant in de buurt’, hebben ze nú een oplossing nodig. Ze zijn klaar om te boeken of te kopen. Met een sterk en zichtbaar Google-profiel vang je exact die klanten op." },
+    { q:'Moet ik maandelijks betalen voor Google Ads of advertenties?', a:"Nee, wij doen bewust geen Google Ads of betaalde campagnes. Advertenties verdwijnen namelijk onmiddellijk zodra je stopt met betalen. Wij bouwen aan je organische (gratis) vindbaarheid. Dat is een veel duurzamere fundering: je trekt nieuwe klanten aan omdat Google jouw zaak lokaal als de meest relevante en betrouwbare optie ziet, niet omdat je per klik betaalt." },
+    { q:'Heeft een Google Bedrijfsprofiel wel echt zin voor mijn lokale zaak?', a:"Absoluut. De cijfers spreken voor zich: maar liefst 46% van álle zoekopdrachten op Google is lokaal gericht. Mensen zoeken de klok rond naar zaken in hun buurt. Volgens de data van Google krijgt een volledig ingevuld en actief profiel tot 7 keer meer klikken dan een onvolledig profiel. Als jouw zaak daar niet professioneel tussen staat, gaat die klant naar de concurrent." },
+    { q:'Hoe zorg ik voor meer reviews zonder risico op slechte reacties?', a:"Dat lossen we op met de review-filter in onze software. We sturen klanten automatisch een uitnodiging na hun bezoek. Geven ze 4 of 5 sterren? Dan sturen we ze direct door naar Google om die positieve review openbaar te plaatsen. Was hun ervaring minder (1, 2 of 3 sterren)? Dan vangen we die feedback intern op via een formulier, rechtstreeks in jouw mailbox. Zo los je het probleem één-op-één op en bescherm je jouw online reputatie." },
+  ];
+  const plusIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>';
+  document.getElementById('faqList').innerHTML = faqs.map((f,i)=>`
+    <div class="faq ${i===0?'open':''}">
+      <button aria-expanded="${i===0}" onclick="toggleFaq(this)"><span>${f.q}</span>${plusIcon}</button>
+      <div class="faq-body"><div><p>${f.a}</p></div></div>
+    </div>`).join('');
+
+  function toggleFaq(btn){
+    const faq = btn.closest('.faq');
+    const isOpen = faq.classList.contains('open');
+    document.querySelectorAll('.faq').forEach(f=>{ f.classList.remove('open'); f.querySelector('button').setAttribute('aria-expanded','false'); });
+    if(!isOpen){ faq.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+  }
+
+  /* ---- Page switching ---- */
+  function showPage(id, anchor){
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById('page-'+id).classList.add('active');
+    if(anchor){
+      requestAnimationFrame(()=>document.getElementById(anchor)?.scrollIntoView({behavior:'smooth'}));
+    } else {
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+  }
+
+  /* ---- Mobile menu ---- */
+  function toggleMenu(btn){
+    const nav = document.getElementById('mobileNav');
+    const open = nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open);
+  }
+  function closeMenu(){ document.getElementById('mobileNav').classList.remove('open'); }
+
+  /* ---- Contact form ---- */
+  function submitForm(e){
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<svg class="icon spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Bezig met verzenden…';
+    setTimeout(()=>{
+      document.getElementById('formSlot').innerHTML = `
+        <div class="glass form-done">
+          <span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span>
+          <h2>Bedankt, ik neem snel contact op!</h2>
+          <p>Je aanvraag is verstuurd. Ik bekijk je Google-profiel en kom binnen één werkdag bij je terug met een eerlijke inschatting.</p>
+        </div>`;
+    }, 900);
+  }
+</script>
 </body>
 </html>
