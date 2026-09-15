@@ -1,11 +1,26 @@
 <!doctype html>
 <html lang="nl">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>OP DE KAART — Google beheer & reviewbescherming</title>
-<meta name="description" content="Wij richten je Google Bedrijfsprofiel perfect in en verzamelen automatisch nieuwe reviews. Lokaal beter gevonden worden in Vlaanderen." />
-<style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <title>OP DE KAART — Google beheer & reviewbescherming</title>
+  <meta name="description" content="Wij richten je Google Bedrijfsprofiel perfect in en verzamelen automatisch nieuwe reviews. Lokaal beter gevonden worden in Vlaanderen." />
+
+  <!-- Open Graph tags voor als de link gedeeld wordt (WhatsApp, LinkedIn, etc.) -->
+  <meta property="og:title" content="OP DE KAART — Google beheer & reviewbescherming" />
+  <meta property="og:description" content="Wij richten je Google Bedrijfsprofiel perfect in en verzamelen automatisch nieuwe reviews. Lokaal beter gevonden worden in Vlaanderen." />
+  <meta property="og:type" content="website" />
+  <!-- LET OP: verander 'jouwwebsite.be' hieronder naar jouw echte domeinnaam! -->
+  <meta property="og:image" content="https://jouwwebsite.be/logo_opdekaart.png" />
+  
+  <!-- Twitter card (zorgt voor een grote afbeelding bij het delen) -->
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Dit zorgt ervoor dat het logo ook als klein icoontje in het browsertabblad (favicon) staat -->
+  <link rel="icon" type="image/png" href="logo_opdekaart.png" />
+
+  <style>
   :root{
     color-scheme: dark;
     --background: oklch(0.16 0.028 264);
@@ -32,6 +47,8 @@
   a{ color:inherit; text-decoration:none; }
   h1,h2,h3{ letter-spacing:-0.02em; line-height:1.1; font-weight:700; }
   section{ position:relative; }
+  </style>
+</head>
 
   .wrap{ max-width:var(--max); margin:0 auto; padding:0 1.25rem; }
   @media(min-width:768px){ .wrap{ padding:0 2rem; } }
@@ -64,9 +81,7 @@
   header{ position:sticky; top:0; z-index:50; border-bottom:1px solid oklch(1 0 0 / 7%); background:oklch(0.16 0.028 264 / 80%); backdrop-filter:blur(16px); }
   .nav-row{ display:flex; align-items:center; justify-content:space-between; gap:1.5rem; height:4.5rem; }
   .logo{ display:flex; align-items:center; gap:.75rem; }
-  .logo-badge{ position:relative; width:2.5rem; height:2.5rem; display:flex; align-items:center; justify-content:center; border-radius:.6rem; background:var(--primary); box-shadow:0 0 24px -6px var(--primary); overflow:hidden; flex:none; }
-  .logo-badge svg{ width:1.25rem; height:1.25rem; color:var(--primary-foreground); }
-  .logo-img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .header-logo{ height:2.5rem; width:auto; object-fit:contain; flex:none; border-radius:.4rem; }
   .logo-name{ font-size:.875rem; font-weight:700; }
   .logo-sub{ margin-top:.15rem; font-size:.625rem; font-weight:500; text-transform:uppercase; letter-spacing:.18em; color:var(--muted-foreground); }
   nav.main{ display:none; align-items:center; gap:.25rem; }
@@ -168,20 +183,14 @@
   .cta-btns{ margin-top:2rem; display:flex; flex-direction:column; gap:.75rem; justify-content:center; }
   @media(min-width:640px){ .cta-btns{ flex-direction:row; } }
 
-  /* Over ons */
-  .about-grid{ margin-top:1.5rem; display:grid; gap:3rem; align-items:center; }
-  @media(min-width:1024px){ .about-grid{ grid-template-columns:0.9fr 1.1fr; } }
-  .photo{ position:relative; }
-  .photo .box{ position:relative; overflow:hidden; aspect-ratio:4/5; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.75rem; border-radius:1.5rem; border:1px dashed var(--border); background:oklch(1 0 0 / 3%); text-align:center; padding:2rem; }
-  .photo svg{ width:2rem; height:2rem; color:var(--muted-foreground); }
-  .photo p{ max-width:16rem; font-size:.875rem; color:var(--muted-foreground); }
-  .about-photo-img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:1.5rem; }
-  .about h1{ margin-top:0; font-size:1.875rem; }
+  /* Over ons (aangepast voor pure tekst zonder foto, gecentreerd) */
+  .about-centered { max-width: 48rem; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .about h1{ margin-top:1rem; font-size:1.875rem; }
   @media(min-width:768px){ .about h1{ font-size:3rem; } }
   .about-text{ margin-top:1.5rem; display:flex; flex-direction:column; gap:1.25rem; font-size:1rem; color:var(--muted-foreground); }
-  .values{ margin-top:2rem; list-style:none; display:flex; flex-direction:column; gap:.75rem; }
-  .values li{ display:flex; align-items:center; gap:.75rem; font-size:.875rem; }
-  .values .v-ico{ width:2.25rem; height:2.25rem; display:flex; align-items:center; justify-content:center; border-radius:.5rem; background:oklch(0.6 0.19 256 / 15%); color:var(--primary); }
+  .values{ margin-top:2rem; list-style:none; display:flex; flex-direction:column; gap:.75rem; align-items: center; }
+  .values li{ display:flex; align-items:center; gap:.75rem; font-size:.875rem; text-align: left; }
+  .values .v-ico{ width:2.25rem; height:2.25rem; display:flex; align-items:center; justify-content:center; border-radius:.5rem; background:oklch(0.6 0.19 256 / 15%); color:var(--primary); flex: none; }
   .values .v-ico svg{ width:1.1rem; height:1.1rem; }
 
   /* Contact */
@@ -234,12 +243,8 @@
 <header>
   <div class="wrap nav-row">
     <a class="logo" href="#" onclick="showPage('home');return false;" aria-label="OP DE KAART — naar de homepagina">
-      <!-- LOGO PLACEHOLDER: zet je eigen logo-bestand als "logo.jpg" in dezelfde map als dit HTML-bestand.
-           Zodra dat bestand aanwezig is, verschijnt het automatisch hier. Tot dan blijft het huidige icoon zichtbaar. -->
-      <span class="logo-badge">
-        <img src="logo.jpg" alt="OP DE KAART logo" class="logo-img" onerror="this.style.display='none';">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-      </span>
+      <!-- LOGO PLACEHOLDER: Vul de bestandsnaam in bij 'src' -->
+      <img src="JOUW_LOGO_HIER.png" alt="OP DE KAART logo" class="header-logo" onerror="this.style.display='none';">
       <span>
         <span class="logo-name" style="display:block">OP DE KAART</span>
         <span class="logo-sub">Google beheer &amp; reviewbescherming</span>
@@ -299,8 +304,8 @@
       <div class="hero-visual">
         <div class="glow" style="inset:0;transform:translate(1.5rem,1.5rem);filter:blur(2rem);background:oklch(0.6 0.19 256 / 15%)"></div>
         <div class="frame">
-          <!-- AFBEELDING PLACEHOLDER: plaats "hero-google-profile.png" in dezelfde map als dit bestand -->
-          <img src="hero-google-profile.png" alt="Laptop en smartphone met een geoptimaliseerd Google Bedrijfsprofiel met reviews en kaart" onerror="this.outerHTML='&lt;div class=&quot;hero-fallback&quot;&gt;Ruimte voor een visual van een geoptimaliseerd Google Bedrijfsprofiel&lt;/div&gt;'">
+          <!-- AFBEELDING PLACEHOLDER: plaats "Google_Beheer.png" in dezelfde map als dit bestand -->
+          <img src="Google_Beheer.png" alt="Laptop en smartphone met een geoptimaliseerd Google Bedrijfsprofiel met reviews en kaart" onerror="this.outerHTML='&lt;div class=&quot;hero-fallback&quot;&gt;Ruimte voor een visual van een geoptimaliseerd Google Bedrijfsprofiel&lt;/div&gt;'">
         </div>
       </div>
     </div>
@@ -384,37 +389,24 @@
 <!-- ================= OVER ONS ================= -->
 <div class="page" id="page-over">
   <section class="bg-grid section-pad">
-    <div class="wrap about">
+    <div class="wrap about about-centered">
       <span class="eyebrow">Over ons</span>
-      <div class="about-grid">
-        <div class="photo">
-          <div class="glow" style="inset:0;transform:translate(1.25rem,1.25rem);filter:blur(2rem);background:oklch(0.6 0.19 256 / 15%)"></div>
-          <!-- FOTO PLACEHOLDER: plaats "milan-foto.jpg" in dezelfde map als dit bestand en de foto verschijnt automatisch -->
-          <div class="box">
-            <img src="milan-foto.jpg" alt="Foto van Milan, oprichter van OP DE KAART" class="about-photo-img" onerror="this.style.display='none';">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.09-3.09a2 2 0 0 0-2.82 0L6 21"/></svg>
-            <p>Ruimte voor een professionele, spontane foto van Milan</p>
-          </div>
-        </div>
-        <div>
-          <h1>Wie zit er achter OP DE KAART?</h1>
-          <div class="about-text">
-            <p>Hallo, ik ben Milan. Als student-zelfstandige, in combinatie met mijn masteropleiding Management en Informatica aan de UGent, merkte ik de laatste jaren iets op. In Vlaanderen zijn er heel wat sterke lokale zaken — vakmensen die elke dag topkwaliteit afleveren, maar die simpelweg de tijd niet hebben om echt focus te leggen op Google en hun online zichtbaarheid.</p>
-            <p>Ik vind dat zonde, en net daarom ben ik OP DE KAART gestart. Geen groot, onpersoonlijk marketingbureau waar je het zoveelste nummertje bent, maar gewoon een nuchtere partner die met je meedenkt.</p>
-            <p>Ik voorzie voor jouw zaak het volledige plaatje: van de eerste technische opzet tot het vlotte beheer van je profiel en reviews. Daarbij waarborg ik altijd persoonlijk contact. We zitten samen aan tafel, bekijken eerlijk wat jouw zaak nodig heeft, en ik zorg dat het netjes geregeld wordt. Jij focust op je klanten, ik zorg dat Google voor jou werkt.</p>
-          </div>
-          <ul class="values">
-            <li><span class="v-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 12 5.12 2.2"/><path d="m13 12 5.88-9.8"/><path d="M8 7h8"/><circle cx="12" cy="17" r="5"/><path d="M12 18v-2h-.5"/></svg></span>Persoonlijk contact, geen nummertje</li>
-            <li><span class="v-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></span>Master Management &amp; Informatica (UGent)</li>
-            <li><span class="v-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>Actief bij lokale zaken in Vlaanderen</li>
-          </ul>
-          <div class="hero-btns">
-            <a class="btn btn-primary" onclick="showPage('home','aanbod-en-prijs')">Bekijk het aanbod
-              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </a>
-            <a class="btn btn-ghost" onclick="showPage('contact')">Neem contact op</a>
-          </div>
-        </div>
+      <h1>Wie zit er achter OP DE KAART?</h1>
+      <div class="about-text">
+        <p>Hallo, ik ben Milan. Als student-zelfstandige, in combinatie met mijn masteropleiding Management en Informatica aan de UGent, merkte ik de laatste jaren iets op. In Vlaanderen zijn er heel wat sterke lokale zaken — vakmensen die elke dag topkwaliteit afleveren, maar die simpelweg de tijd niet hebben om echt focus te leggen op Google en hun online zichtbaarheid.</p>
+        <p>Ik vind dat zonde, en net daarom ben ik OP DE KAART gestart. Geen groot, onpersoonlijk marketingbureau waar je het zoveelste nummertje bent, maar gewoon een nuchtere partner die met je meedenkt.</p>
+        <p>Ik voorzie voor jouw zaak het volledige plaatje: van de eerste technische opzet tot het vlotte beheer van je profiel en reviews. Daarbij waarborg ik altijd persoonlijk contact. We zitten samen aan tafel, bekijken eerlijk wat jouw zaak nodig heeft, en ik zorg dat het netjes geregeld wordt. Jij focust op je klanten, ik zorg dat Google voor jou werkt.</p>
+      </div>
+      <ul class="values">
+        <li><span class="v-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 12 5.12 2.2"/><path d="m13 12 5.88-9.8"/><path d="M8 7h8"/><circle cx="12" cy="17" r="5"/><path d="M12 18v-2h-.5"/></svg></span>Persoonlijk contact, geen nummertje</li>
+        <li><span class="v-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></span>Master Management &amp; Informatica (UGent)</li>
+        <li><span class="v-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>Actief bij lokale zaken in Vlaanderen</li>
+      </ul>
+      <div class="hero-btns" style="justify-content: center; margin-top: 2rem;">
+        <a class="btn btn-primary" onclick="showPage('home','aanbod-en-prijs')">Bekijk het aanbod
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a class="btn btn-ghost" onclick="showPage('contact')">Neem contact op</a>
       </div>
     </div>
   </section>
@@ -460,10 +452,8 @@
     <div class="foot-grid">
       <div>
         <div class="logo">
-          <span class="logo-badge">
-            <img src="logo.jpg" alt="OP DE KAART logo" class="logo-img" onerror="this.style.display='none';">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-          </span>
+          <!-- LOGO PLACEHOLDER VOOR FOOTER: Vul de bestandsnaam in bij 'src' -->
+          <img src="JOUW_LOGO_HIER.png" alt="OP DE KAART logo" class="header-logo" onerror="this.style.display='none';">
           <span class="logo-name">OP DE KAART</span>
         </div>
         <p class="foot-desc">Lokaal beter gevonden worden. Wij richten je Google-profiel perfect in en verzamelen automatisch nieuwe reviews.</p>
